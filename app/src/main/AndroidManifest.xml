@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fireminder.semele" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <application
+        android:name=".SemeleApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <provider
+            android:name=".model.SemeleContentProvider"
+            android:authorities="com.fireminder.semele.provider" />
+
+        <activity
+            android:name=".ui.devicescan.DeviceScanActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ui.sessionreport.SessionReportActivity"
+            android:label="@string/title_activity_session_report" >
+        </activity>
+        <activity
+            android:name=".ui.currentsession.CurrentSessionActivity"
+            android:label="@string/title_activity_current_session" >
+        </activity>
+
+        <receiver android:name=".BpmBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="com.fireminder.semele.BpmBroadcastReceiver.BPM" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".bluetooth.BleService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2" >
+
+        </activity>
+
+        <service
+            android:name=".ActiveSessionService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".SessionListActivity"
+            android:label="@string/title_activity_session_list" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
